@@ -1,0 +1,404 @@
+<!--#set var="TITLE" value="MIT-BIH Polysomnographic Database: Signals and Annotations"-->
+<!--#include virtual="/head.shtml"-->
+
+<p>
+Each record includes a header (<tt>.hea</tt>) file, a short text file that
+contains information about the types of signals, calibration constants, the
+length of the recording, and (in the last line of the file) the age, gender,
+and weight (in kg) of the subject.  In this database, all 16 subjects were
+male, aged 32 to 56 (mean age 43), with weights ranging from 89 to 152 kg (mean
+weight 119 kg).  Records <tt>slp01a</tt> and <tt>slp01b</tt> are segments of
+one subject's polysomnogram, separated by a gap of about one hour; records
+<tt>slp02a</tt> and <tt>slp02b</tt> are segments of another subject's
+polysomnogram, separated by a ten-minute gap.  The remaining 14 records are all
+from different subjects.
+
+<p>
+All recordings include an ECG signal, an invasive blood pressure signal
+(measured using a catheter in the radial artery), an EEG signal, and a
+respiration signal (in most cases, from a nasal thermistor).  The six- and
+seven-channel recordings also include a respiratory effort signal derived by
+inductance plethysmography; some include an EOG signal and an EMG signal (from
+the chin), and the remainder include a cardiac stroke volume signal (see
+reference below) and an earlobe oximeter signal.  The table below summarizes
+the contents of each record:
+
+<center>
+<table cellpadding=2 width=90%>
+<tr>
+<th align=left>Record</th>
+<th>length</th>
+<th>AHI</th>
+<th>ECG</th>
+<th>BP</th>
+<th>EEG</th>
+<th>Resp<br>(nasal)</th>
+<th>Resp<br>(pleth [1])</th>
+<th>EOG</th>
+<th>EMG</th>
+<th>SV</th>
+<th>SO2</th>
+</tr>
+
+<tr>
+<td align=center>slp01a</td>
+<td align=center>2:00</td>
+<td align=right>17.0</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C4-A1)</td>
+<td align=center>-</td>
+<td align=center>3 (S)</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+</tr>
+
+<tr>
+<td align=center>slp01b</td>
+<td align=center>3:00</td>
+<td align=right>22.3</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C4-A1)</td>
+<td align=center>-</td>
+<td align=center>3 (S)</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+</tr>
+
+<tr>
+<td align=center>slp02a</td>
+<td align=center>3:00</td>
+<td align=right>34.0</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (O2-A1)</td>
+<td align=center>3</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+</tr>
+
+<tr>
+<td align=center>slp02b</td>
+<td align=center>2:15</td>
+<td align=right>22.2</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (O2-A1)</td>
+<td align=center>3</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+</tr>
+
+<tr>
+<td align=center>slp03</td>
+<td align=center>6:00</td>
+<td align=right>43.0</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C3-O1)</td>
+<td align=center>3</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+</tr>
+
+<tr>
+<td align=center>slp04</td>
+<td align=center>6:00</td>
+<td align=right>59.8</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C3-O1)</td>
+<td align=center>3</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+</tr>
+
+<tr>
+<td align=center>slp14</td>
+<td align=center>6:00</td>
+<td align=right>30.7</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C3-O1)</td>
+<td align=center>3</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+</tr>
+
+<tr>
+<td align=center>slp16</td>
+<td align=center>6:00</td>
+<td align=right>53.1</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C3-O1)</td>
+<td align=center>3</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>-</td>
+</tr>
+
+<tr>
+<td align=center>slp32</td>
+<td align=center>5:20</td>
+<td align=right>22.1</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C4-A1)</td>
+<td align=center>3</td>
+<td align=center>4 (C)</td>
+<td align=center>5</td>
+<td align=center>6</td>
+<td align=center>-</td>
+<td align=center>-</td>
+</tr>
+
+<tr>
+<td align=center>slp37</td>
+<td align=center>5:50</td>
+<td align=right>100.8</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C4-A1)</td>
+<td align=center>3</td>
+<td align=center>4 (A)</td>
+<td align=center>5</td>
+<td align=center>6</td>
+<td align=center>-</td>
+<td align=center>-</td>
+</tr>
+
+<tr>
+<td align=center>slp41</td>
+<td align=center>6:30</td>
+<td align=right>60 [2]</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C4-A1)</td>
+<td align=center>3</td>
+<td align=center>4 (A)</td>
+<td align=center>5</td>
+<td align=center>6</td>
+<td align=center>-</td>
+<td align=center>-</td>
+</tr>
+
+<tr>
+<td align=center>slp45</td>
+<td align=center>6:20</td>
+<td align=right>5 [2]</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C3-O1)</td>
+<td align=center>3</td>
+<td align=center>4 (A)</td>
+<td align=center>5</td>
+<td align=center>6</td>
+<td align=center>-</td>
+<td align=center>-</td>
+</tr>
+
+<tr>
+<td align=center>slp48</td>
+<td align=center>6:20</td>
+<td align=right>46.8</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C3-O1)</td>
+<td align=center>3</td>
+<td align=center>4 (C)</td>
+<td align=center>5</td>
+<td align=center>6</td>
+<td align=center>-</td>
+<td align=center>-</td>
+</tr>
+
+<tr>
+<td align=center>slp59</td>
+<td align=center>4:00</td>
+<td align=right>55.3</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C3-O1)</td>
+<td align=center>3</td>
+<td align=center>4 (A)</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>5</td>
+<td align=center>6</td>
+</tr>
+
+<tr>
+<td align=center>slp60</td>
+<td align=center>5:55</td>
+<td align=right>59.2</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C3-O1)</td>
+<td align=center>4</td>
+<td align=center>3 (A)</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>5</td>
+<td align=center>6</td>
+</tr>
+
+<tr>
+<td align=center>slp61</td>
+<td align=center>6:10</td>
+<td align=right>41.2</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C3-O1)</td>
+<td align=center>-</td>
+<td align=center>3 (A)</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>4</td>
+<td align=center>5</td>
+</tr>
+
+<tr>
+<td align=center>slp66</td>
+<td align=center>3:40</td>
+<td align=right>65.5</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C3-O1)</td>
+<td align=center>3</td>
+<td align=center>4 (A)</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>5</td>
+<td align=center>6</td>
+</tr>
+
+<tr>
+<td align=center>slp67x</td>
+<td align=center>1:17</td>
+<td align=right>0.7</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>2 (C3-O1)</td>
+<td align=center>3</td>
+<td align=center>4 (C)</td>
+<td align=center>-</td>
+<td align=center>-</td>
+<td align=center>5</td>
+<td align=center>6</td>
+</tr>
+
+</table>
+</center>
+
+<p>
+[1] <i>Respiratory effort signal from inductance plethysmography: sum (S),
+    abdominal (A), or chest (C) signal</i><br>
+[2] <i>Estimated from visual review; apnea annotations unavailable</i>
+
+<p>
+Entries in the table indicate, for each record, the signal numbers of the
+signals named at the top of the table.  Note that the usual ordering of the
+respiratory signals is reversed for record `slp60'.  These signal numbers may
+be used to select specific signals for examination using <a
+href="/physiotools/wag/rdsamp-1.htm">rdsamp (1)</a>.  Durations are given in
+hours and minutes.
+
+<p>
+Each record includes two annotation files.  The `<tt>.ecg</tt>' files contain
+beat annotations, and the `<tt>.st</tt>' files contain sleep stage and apnea
+annotations.  Information about types of annotations in the `<tt>.ecg</tt>'
+files is included in the <a href="/physiotools/wpg/">WFDB Programmer's
+Guide</a>.  Annotations in the `<tt>.st</tt>' files are all <tt>NOTE</tt>
+annotations, which contain the sleep staging and apnea information in their
+<tt>aux</tt> fields.  Each annotation in the `<tt>.st</tt>' files applies to
+the thirty seconds of the record that <em>follow</em> the annotation.  The
+coding scheme is:
+
+<center><table>
+<tr><th align=center width=20%>aux</th><th align=left>meaning</th></tr>
+<tr><td align=center>W</td><td>subject is awake</td></tr>
+<tr><td align=center>1</td><td>sleep stage 1</td></tr>
+<tr><td align=center>2</td><td>sleep stage 2</td></tr>
+<tr><td align=center>3</td><td>sleep stage 3</td></tr>
+<tr><td align=center>4</td><td>sleep stage 4</td></tr>
+<tr><td align=center>R</td><td>REM sleep</td></tr>
+<tr><td align=center>H</td><td>Hypopnea</td></tr>
+<tr><td align=center>HA</td><td>Hypopnea with arousal</td></tr>
+<tr><td align=center>OA</td><td>Obstructive apnea</td></tr>
+<tr><td align=center>X</td><td>Obstructive apnea with arousal</td></tr>
+<tr><td align=center>CA</td><td>Central apnea</td></tr>
+<tr><td align=center>CAA</td><td>Central apnea with arousal</td></tr>
+<tr><td align=center>L</td><td>Leg movements</td></tr>
+<tr><td align=center>LA</td><td>Leg movements with arousal</td></tr>
+<tr><td align=center>A</td><td>Unspecified arousal</td></tr>
+<tr><td align=center>MT</td><td>Movement time</td></tr>
+</table></center>
+
+<h3>References</h3>
+
+<p>
+Ichimaru Y, Moody GB.  
+<a href="http://ecg.mit.edu/george/publications/slpdb-pcn-1999.pdf"
+target="other">Development of the polysomnographic database on CD-ROM</a>.
+<i>Psychiatry and Clinical Neurosciences</i> 1999 Apr; <b>53</b>(2):175-177.
+
+<p>
+Lee JM, Kim DJ, Kim IY, Park KS, Kim SI.  Detrended fluctuation analysis of EEG
+in sleep apnea using MIT/BIH polysomnography data. <i>Comput Biol Med</i>
+2002 Jan; <b>32</b>(1):37-47. [<a
+href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=11738639&dopt=Abstract" target="other">Abstract</a>]
+
+<p>
+Rigney DR, Goldberger AL, Ocasio WC <i>et al.</i>  Multichannel physiological
+data description and analysis. In: Weigend AS, Gerschenfeld NA (eds.), <i>Time
+Series Prediction</i>, pp 105-129.  Addison-Wesley, 1994.
+
+<p>
+Garpestad E, Katayama H, Parker JA, Ringler J, Lilly J, Yasuda T, Moore RH,
+Strauss HW, Weiss JW.  Stroke volume and cardiac output decrease at termination
+of obstructive apneas. <i>J Appl Physiol</i> <b>73</b>(5):1743-1748, 1992
+Nov. [<a
+href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=1474046&dopt=Abstract"
+target="other">Abstract</a>]
+
+<p>
+Ichimaru Y, Clark KP, Ringler J, Weiss WJ.  Effect of sleep stage on the
+relationship between respiration and heart rate variability.  <i>Computers
+in Cardiology 1990</i> 1990; <b>17</b>:657-660.
+
+<p>
+Tamaki N, Yasuda T, Moore RH, Gill JB, Boucher CA, Hutter AM, Gold HK, Strauss
+HW. Continuous monitoring of left ventricular function by an ambulatory
+radionuclide detector in patients with coronary artery disease.  <i>JACC</i>
+1988; <b>12</b>(3):669-679.  <em>[This reference describes the method used to
+obtain the left ventricular stroke volume signal included in some of the
+recordings in the database; it does not describe or refer to the database
+itself.]</em> [<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=3403823&dopt=Abstract"
+target="other">Abstract</a>]
+
+<!--#include virtual="/footer.shtml"-->
+</body>
+</html>

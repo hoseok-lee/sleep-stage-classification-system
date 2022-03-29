@@ -1,0 +1,3 @@
+-r slp01b
+-a st
+-p http://<!--#echo var="SERVER_NAME" --><!--#echo var="DOCUMENT_URI" -->
