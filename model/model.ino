@@ -86,6 +86,9 @@ void loop()
       return;
     }
 
+    // Find maximum from softmax
+    int prediction = 0;
+    int max_prob = 0;
     int8_t raw_output[OUTPUT_SIZE];
     // Obtain the quantized output from model's output tensor
     for (int i = 0; i < OUTPUT_SIZE; ++i)
@@ -94,7 +97,48 @@ void loop()
       raw_output[i] = output->data.int8[i];
       // Dequantize the output from integer to floating-point
       raw_output[i] = (raw_output[i] - output->params.zero_point) * output->params.scale;
-      Serial.print(String(raw_output[i]) + "\n");
+
+      if (max_prob < raw_output[i])
+      {
+        max_prob = raw_output[i];
+        prediction = i;
+      }
+    }
+
+    Serial.print(String(prediction) + "\n");
+    switch (prediction)
+    {
+      case 0:
+        digitalWrite(LEDR, LOW);
+        digitalWrite(LEDG, LOW);
+        digitalWrite(LEDB, LOW);
+        break;
+      case 1:
+        digitalWrite(LEDB, LOW);
+        digitalWrite(LEDR, HIGH);
+        digitalWrite(LEDG, HIGH);
+        break;
+      case 2:
+        digitalWrite(LEDG, LOW);
+        digitalWrite(LEDB, HIGH);
+        digitalWrite(LEDR, HIGH);
+        break;
+      case 3:
+        digitalWrite(LEDB, LOW);
+        digitalWrite(LEDR, LOW);
+        digitalWrite(LEDG, HIGH);
+        break;
+      case 4:
+        digitalWrite(LEDR, LOW);
+        digitalWrite(LEDG, HIGH);
+        digitalWrite(LEDB, HIGH);
+        break;
+      case 5:
+      default:
+        digitalWrite(LEDR, HIGH);
+        digitalWrite(LEDG, HIGH);
+        digitalWrite(LEDB, HIGH);
+        break;
     }
       
     // Read the other data on the next iteration
